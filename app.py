@@ -2,9 +2,10 @@ from flask import Flask, request, jsonify
 import jwt
 from functools import wraps
 import mindsdb_sdk
+import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "SECRET_KEY"
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 PROJECT_NAME = 'm_y_ai' 
 MODEL_NAME = 'mindyourai'
 
