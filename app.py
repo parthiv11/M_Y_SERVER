@@ -64,7 +64,7 @@ def login():
         project = get_or_create_project(server=server)
         
         my_model = get_or_create_model(key=key,project=project,server=server)
-        token = jwt.encode({'email': email, 'password': password}, app.config['SECRET_KEY'], algorithm='HS256')
+        token = jwt.encode({'email': email, 'password': password}, app.config['SECRET_KEY'], algorithm=os.getenv('ALGORITHM'))
         return jsonify({'token': token})
 
     except Exception as e:
@@ -135,7 +135,7 @@ def get_prediction(decoded):
         return jsonify({'error': str(e)})
 
 
-    
+# ADD Update key function     
 
 
 if __name__ == '__main__':
