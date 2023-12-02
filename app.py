@@ -132,7 +132,6 @@ def get_prediction(decoded):
         result = server.query(sql_query).fetch()
         return jsonify({'prediction': result[0][0] if result else None})
     except Exception as e:
-        print(dir(e))
         return jsonify({'error': str(e)})
 
 
@@ -140,4 +139,4 @@ def get_prediction(decoded):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
