@@ -1,0 +1,4 @@
+Flask 
+mindsdb_sdk
+jwt
+
