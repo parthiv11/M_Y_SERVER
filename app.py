@@ -4,8 +4,8 @@ from functools import wraps
 import mindsdb_sdk
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'sjjjajjajjaajj'  # Replace with a strong and secure secret key
-PROJECT_NAME = 'm_y_ai'  # Replace with your actual MDB cookie
+app.config['SECRET_KEY'] = "SECRET_KEY"
+PROJECT_NAME = 'm_y_ai' 
 MODEL_NAME = 'mindyourai'
 
 def get_or_create_project(server, project_name=PROJECT_NAME):
