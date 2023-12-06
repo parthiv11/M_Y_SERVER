@@ -16,19 +16,21 @@ def get_or_create_project(server, project_name=PROJECT_NAME):
         return server.create_project(project_name)
 
 
-def get_or_create_model(key, project,server, model_name=MODEL_NAME):
+def create_model(key, project,server, model_name=MODEL_NAME):
     try:
-        return  project.get_model(MODEL_NAME) 
-    except:
+        if project.get_model(MODEL_NAME):
+            project.drop_model(MODEL_NAME) 
         return project.create_model(
         name = MODEL_NAME,
         predict = 'answer',
         engine=server.ml_engines.openai,
-        prompt_template = 'Context: {"{{context}}"}. Question: {"{{question}}"}. Answer:',
+        prompt_template = 'Context: {{context}}. Question: {{question}}. Answer:',
         max_tokens = 3900,
         temperature = 0.6,
         api_key= key
     )
+    except:
+        return None
     
 
 
@@ -63,7 +65,7 @@ def login():
         server = mindsdb_sdk.connect(login=email, password=password)
         project = get_or_create_project(server=server)
         
-        my_model = get_or_create_model(key=key,project=project,server=server)
+        my_model = create_model(key=key,project=project,server=server)
         token = jwt.encode({'email': email, 'password': password}, app.config['SECRET_KEY'], algorithm=os.getenv('ALGORITHM'))
         return jsonify({'token': token})
 
