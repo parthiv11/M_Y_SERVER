@@ -132,7 +132,7 @@ def get_prediction(decoded):
 
     try:
         result = server.query(sql_query).fetch()
-        return jsonify({'prediction': result[0][0] if result else None})
+        return jsonify({'prediction': result['answer'][0]})
     except Exception as e:
         return jsonify({'error': str(e)})
 
