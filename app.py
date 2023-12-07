@@ -59,7 +59,7 @@ def verify_token(func):
 def login():
     data = request.get_json()
     email = data.get('email')
-    password = data.get('password')
+    password = data.get('pass')
     key = data.get('key')
     try:
         server = mindsdb_sdk.connect(login=email, password=password)
